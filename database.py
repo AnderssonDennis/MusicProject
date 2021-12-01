@@ -5,7 +5,6 @@ import sqlite3
 def run(query, values = {}):
   '''
     Helper function to update database.
-
     :param: query: The SQL-query to execute.
     :param: values: The values to be used with the query. (default = {})
     :return: The autoincremented 'id' from an INSERT
@@ -27,7 +26,6 @@ def run(query, values = {}):
 def get(query, values = {}):
   '''
     Helper function to get data from database.
-
     :param: query: The SQL-query to execute.
     :param: values: The values to be used with the query. (default = {})
     :return: The results from the query as a list of Rows
