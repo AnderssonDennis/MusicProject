@@ -12,19 +12,19 @@ run('''
 # Album table
 run('''
   CREATE TABLE IF NOT EXISTS album (
-    artistid INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     album_name STRING NOT NULL,
     year_release STRING,
-    FOREIGN KEY(artistid) REFERENCES arist(id)
+    FOREIGN KEY(artist_id) REFERENCES arist(id)
  )
 ''')
 
 # Songs table
 run('''
   CREATE TABLE IF NOT EXISTS songs (
-    albumid INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     song_name STRING NOT NULL,
     song_duration INTEGER NOT NULL,
-    FOREIGN KEY(albumid) REFERENCES album(id)
+    FOREIGN KEY(album_id) REFERENCES album(id)
  )
 ''')
