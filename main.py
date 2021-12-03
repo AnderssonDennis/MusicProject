@@ -34,7 +34,6 @@ run('''
  )
 ''')
 
-
 artists = [
   {
     'artist_name': 'Ed Sheeran',
@@ -53,12 +52,8 @@ artists = [
   },
 ]
 
-
-for mock_artist in artists:
-  run('INSERT INTO artist VALUES(NULL, :description, :artist_name)', mock_artist)
-
-
-
+#for mock_artist in artists:
+#  run('INSERT INTO artist VALUES(NULL, :description, :artist_name)', mock_artist)
 
 albums = [
   {
@@ -83,11 +78,8 @@ albums = [
   },
 ]
 
-for mock_album in albums:
- run('INSERT INTO album VALUES(NULL, :artist_id, :album_name, :description, :year_released)', mock_album)
-
-
-
+#for mock_album in albums:
+# run('INSERT INTO album VALUES(NULL, :artist_id, :album_name, :description, :year_released)', mock_album)
 
 songs_ed = [
   {
@@ -141,10 +133,8 @@ songs_ed = [
   },
 ]
 # Eds albumlista
-for mock_ed in songs_ed:
-  run('INSERT INTO song VALUES(NULL, :artist_id, :song_name, :song_duration)', mock_ed)
-
-
+#for mock_ed in songs_ed:
+# run('INSERT INTO song VALUES(NULL, :artist_id, :song_name, :song_duration)', mock_ed)
 
 songs_elvis = [
   {
@@ -197,12 +187,8 @@ songs_elvis = [
   },
 ]
 # Elvis albumlista
-for mock_elvis in songs_elvis:
-  run('INSERT INTO song VALUES(NULL, :artist_id, :song_name, :song_duration)', mock_elvis)
-
-
-
-
+#for mock_elvis in songs_elvis:
+#  run('INSERT INTO song VALUES(NULL, :artist_id, :song_name, :song_duration)', mock_elvis)
 
 songs_mj = [
   {
@@ -255,8 +241,8 @@ songs_mj = [
   },
 ]
 # Michael Jackson
-for mock_mj in songs_mj:
-  run('INSERT INTO song VALUES(NULL, :artist_id, :song_name, :song_duration)', mock_mj)
+#for mock_mj in songs_mj:
+#  run('INSERT INTO song VALUES(NULL, :artist_id, :song_name, :song_duration)', mock_mj)
 
 # select all albums with songs
 db_album = get('''
@@ -265,26 +251,43 @@ db_album = get('''
   ON album.id = song.album_id
 ''')
 
-# heroes is a dict where row id is the key for each hero.
-# this enables us to easily check if there's already a hero
+# album is a dict where row id is the key for each album.
+# this enables us to easily check if there's already a album
 # with that id saved.
-album_check = {}
-for row in db_album:
-  print(row['id'], row['album_name'], row['song_name'])
- # create album if not exists
-id = row['id']
+# album_check = {}
+# for row in db_album:
+#   print(row['id'], row['album_name'], row['song_name'])
+#  # create album if not exists
+#   id = row['id']
+# print(id)
+# if album_check.get(id) == None:
+#     album_check[id] = {
+#       row['album_name']: 'Divide',
+#       row['description']: 'Eds most sold album',
+#       row['year_released']: 2017,
+#       row['artist_id']: 1,
+#       'songs': []
+#     }
+# # add song to album
+# if row['song_name'] != None:
+#     album_check[id]['songs'].append({
+#       row['song_name']: 'Galway Girl',
+#       row['song_duration']: 2.50
+#     })
+# print(album_check[id])
 
-if album_check.get(id) == None:
-    album_check[id] = {
-      'album_name': row['Divide'],
-      'description': row['Eds most sold album'],
-      'year_released': row['2017'],
-       'artist_id': row['1'],
-      'songs': []
-    }
-# add song to album
-if row['song_name'] != None:
-    album_check[id]['songs'].append({
-      'song_name': row['Galway Girl'],
-      'song_duration' : row[2.50]
-    })
+# artists = get('SELECT * FROM artist')
+# for artist in artists:
+#   print(artist[2])
+
+songs = get('SELECT SUM (song_duration) FROM song WHERE album_id = 1')
+for song in songs:
+  print(song[0])
+
+songs = get('SELECT SUM (song_duration) FROM song WHERE album_id = 2')
+for song in songs:
+  print(song[0])
+
+songs = get('SELECT SUM (song_duration) FROM song WHERE album_id = 3')
+for song in songs:
+  print(song[0])
